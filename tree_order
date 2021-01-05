@@ -1,0 +1,81 @@
+//having three kinds of sort among the code
+//tree-order
+import java.util.*;
+
+/*
+ * public class TreeNode {
+ *   int val = 0;
+ *   TreeNode left = null;
+ *   TreeNode right = null;
+ * }
+ */
+
+public class Solution {
+     int n;
+     int[][] order;//restore the 3 kinds of order;
+    /**
+     * 
+     * @param root class TreeNode the root of binary tree
+     * @return int[][]
+     */
+    public int[][] threeOrders (TreeNode root) {
+        // write code here
+        n = countTree(root);
+        order=new int[3][n];
+        preOrder(root);
+        midOrder(root);
+        lastOrder(root);
+        return order;
+    }
+    
+    //count The tree node_number
+    public int countTree(TreeNode root){
+        if(root==null){
+            return n; 
+        }else{
+            n++;
+            countTree(root.left);
+            countTree(root.right);
+        }
+        return n;
+    }
+    int pre1 = -1;
+    //pre_order
+    public void preOrder(TreeNode root){
+        if(root==null){
+            return;
+        }else{
+            order[0][++pre1]=root.val;
+            preOrder(root.left);
+            preOrder(root.right);
+        }    
+    }
+    
+    int mid1 = -1;
+    //pre_order
+    public void midOrder(TreeNode root){
+        if(root==null){
+            return;
+        }else{
+            midOrder(root.left);
+            order[1][++mid1]=root.val;
+            midOrder(root.right);
+        }    
+    }
+    
+    
+    int last1 = -1;
+    //pre_order
+    public void lastOrder(TreeNode root){
+        if(root==null){
+            return;
+        }else{
+            lastOrder(root.left);
+            lastOrder(root.right);
+            order[2][++last1]=root.val;
+        }    
+    }
+    
+    
+    
+}
